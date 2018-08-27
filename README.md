@@ -12,12 +12,12 @@ $('aside') // retorna un array con todas las etiquetas espeficicadas
 > $click([elemento],funcion); : asigna una funcion para el evento click <br>
 Ejemplo:
 ```javascript
-$('#my-div',function(){
+$click('#my-div',function(){
   // tu codigo al hacer click
 });
 
 // mismo ejemplo con arrow funcion
-$('#my-div',()=>{
+$click('#my-div',()=>{
   // tu codigo al hacer click
 });
 ```
