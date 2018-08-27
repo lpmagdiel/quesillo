@@ -1,6 +1,6 @@
 # quesillo 🌯
-quesillo.js es una alternativa minimalista a JQuery para proyectos pequeños y no tan pequeños.
-###funciones
+quesillo.js es una alternativa minimalista a JQuery para proyectos pequeños y no tan pequeños. <br>
+##funciones
 > $([elemento]) : retorna el elemento o elementos cuyo id,clase o etiqueta sea especificado <br>
 Ejemplo:
 ```javascript
