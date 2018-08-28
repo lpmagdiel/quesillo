@@ -48,7 +48,7 @@ $POST('miHost/index.php',{usuario:lpzMagdiel,pais:nicaragua},(res)=>{
 > $GET(url,funcion_ok,funcion_error) : envia una peticion del tipo get usando fetc<br/>
 Ejemplo:
 ```javascript
-$POST('miHost/index.php',(res)=>{
+$GET('miHost/index.php',(res)=>{
   alert('la respuesta del servidor es: '+res);
 },(err)=>{
   alert('ups paso algo: '+err);
