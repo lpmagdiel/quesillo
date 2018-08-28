@@ -85,8 +85,5 @@ forText(marr,(t)=>{
 
 $log(`la letra a se repite ${count} veces`);
 ```
-<<<<<<< HEAD
 > $fadeOut(elemento) : desaparece el elemento con una animacion que dura 500ms<br>
 > $fadeIn(elemento) : aparece el elemento con una animacion que dura 500ms<br>
-=======
->>>>>>> 980586d499b2852550c6e2fe1766682f6b83f35a
