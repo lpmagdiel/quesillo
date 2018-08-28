@@ -48,7 +48,7 @@ $POST('miHost/index.php',{usuario:lpzMagdiel,pais:nicaragua},(res)=>{
 > $GET(url,funcion_ok,funcion_error) : envia una peticion del tipo get usando fetc<br/>
 Ejemplo:
 ```javascript
-$POST('miHost/index.php',(res)=>{
+$GET('miHost/index.php',(res)=>{
   alert('la respuesta del servidor es: '+res);
 },(err)=>{
   alert('ups paso algo: '+err);
@@ -85,5 +85,8 @@ forText(marr,(t)=>{
 
 $log(`la letra a se repite ${count} veces`);
 ```
+<<<<<<< HEAD
 > $fadeOut(elemento) : desaparece el elemento con una animacion que dura 500ms<br>
 > $fadeIn(elemento) : aparece el elemento con una animacion que dura 500ms<br>
+=======
+>>>>>>> 980586d499b2852550c6e2fe1766682f6b83f35a
