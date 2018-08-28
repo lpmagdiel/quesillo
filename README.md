@@ -1,7 +1,7 @@
 # quesillo 🌯
 quesillo.js es una alternativa minimalista a JQuery para proyectos pequeños y no tan pequeños. <br/>
 ###funciones<br/>
-Descargar la version 1.0.0 comprimida <a href="https://lpzmagdiel.neocities.org/quesillo/quesillo.min.js" target="_blank">aqui</a>
+Descargar la version 1.0.0 comprimida <a href="https://lpzmagdiel.neocities.org/quesillo/quesillo.min.js" target="_blank">aqui</a><br/>
 Descargar la version 1.0.0 sin comprimir <a href="https://lpzmagdiel.neocities.org/quesillo/quesillo.js" target="_blank">aqui</a>
 > $([elemento]) : retorna el elemento o elementos cuyo id,clase o etiqueta sea especificado <br/>
 Ejemplo:
