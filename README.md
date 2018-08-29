@@ -29,12 +29,19 @@ Funcionan igual que el evento click
 * out
 * keyDown
 * keyUp
-> $CSS([elemento],[asignar_valor]) : asigna un valor css a uno o varios elementos <br/>
+> $setCSS([elemento],[asignar_valor]) : asigna un valor css a uno o varios elementos <br/>
 Ejemplo:
 ```javascript
-$CSS('p','color:red'); // cambia a rojo el color del texto de todas las etiquetas p
-$CSS('#my-div','background:blue'); // cambia a azul el color del fondo del elemento con el id especificado
-$CSS('.nav','textAlign:"center"'); // centrar el texto de todos los elementos con la clase .nav
+$setCSS('p','color:red'); // cambia a rojo el color del texto de todas las etiquetas p
+$setCSS('#my-div','background:blue'); // cambia a azul el color del fondo del elemento con el id especificado
+$setCSS('.nav','textAlign:"center"'); // centrar el texto de todos los elementos con la clase .nav
+```
+> $getCSS([elemento],[valor]) : devuelve un valor css de el elemento <br/>
+Ejemplo:
+```javascript
+$getCSS('p','color'); // obtiene el color del texto de todas las etiquetas p
+$getCSS('#my-div','background'); // caobtiene el color del fondo del elemento con el id especificado
+$getCSS('.nav','textAlign');
 ```
 > $POST(url,{datos},funcion_ok,funcion_error) : envia una peticion del tipo post usando fetc<br/>
 Ejemplo:
