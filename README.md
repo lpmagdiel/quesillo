@@ -63,6 +63,18 @@ $GET('miHost/index.php',(res)=>{
   alert('ups paso algo: '+err);
 });
 ```
+> $ajax(url,metodo,datos,funcion_ok,funcion_error) : envia una peticion usando ajax<br/>
+Ejemplo:
+```javascript
+function finalizado(res){
+	console.log(res);
+}
+function error(res){
+	console.log('Ups hay un error: ' + res);
+}
+
+$ajax('archivo.txt','GET',{nombre:'peter parker'},finalizado,error);
+```
 > $log(texto) // equivalente a console.log <br/>
 > $warn(texto) // equevalente a console.warn ⚠️ <br/>
 > $error(texto) // equevalente a console.error ⛔ <br/>
