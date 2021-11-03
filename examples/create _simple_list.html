@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a simple list</title>
+</head>
+<body>
+    <ul id="list"></ul>
+    <script src="../lib/quesillo.js"></script>
+    <script>
+        const list = $('#list');
+        
+        for(let i = 1; i<=150; i++){
+            const liConfig = {
+                element:'li',
+                text:'element number '+i
+            }
+            const item = createElement(liConfig);
+            list.append(item.element);
+        }
+    </script>
+</body>
+</html>
