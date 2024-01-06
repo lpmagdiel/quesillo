@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagination</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            width: 100%;
+            height:300px;
+            border: 2px solid black;
+            margin-bottom: 5px;
+        }
+        .page{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="page1" class="page"><h1>page 1</h1></div>
+        <div id="page2" class="page"><h1>page 2</h1></div>
+        <div id="page3" class="page"><h1>page 3</h1></div>
+        <div id="page4" class="page"><h1>page 4</h1></div>
+        <div id="page5" class="page"><h1>page 5</h1></div>
+        <div id="page6" class="page"><h1>page 6</h1></div>
+    </div>
+    <input id="search" type="text" placeholder="Name page">
+    <button id="btn-go">GO!</button>
+    <script src="../lib/quesillo.js"></script>
+    <script>
+        const pages = Array.from($('.page')).map(page => {
+            return {name: page.id, element: page}
+        });
+        const paginator = new Pagination(pages);
+        paginator.activePage("page3");
+        $onClick("#btn-go",e=>{
+            const pageName = $("#search").value;
+            paginator.activePage(pageName);
+        });
+    </script>
+</body>
+</html>
