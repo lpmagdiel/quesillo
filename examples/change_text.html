@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1, initial-scale=1.0">
+    <title>Change text</title>
+    <style>
+        header{
+            width: 100%;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .row{
+            display: grid;
+            grid-template-columns: 1fr 80px;
+            height: 40px;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="title" class="qs">hello</h1>
+    </header>
+    <div class="row">
+        <input type="text" placeholder="text" class="qs" id="inText">
+        <button class="btn qs" id="clearText">clear</button>
+    </div>
+    <script type="module">
+        import { getFromId, getByClass } from "../lib/quesillo.js";
+        const { clearText, inText } = getFromId('elementHTML');
+        const { title } = getFromId();
+
+        clearText.addEventListener("click", e => {
+            inText.value = '';
+        });
+        
+        inText.addEventListener('keyup',e => {
+            title(inText.value);
+        })
+    </script>
+</body>
+</html>

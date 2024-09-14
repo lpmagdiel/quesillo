@@ -7,18 +7,15 @@
     <title>Create a simple list</title>
 </head>
 <body>
-    <ul id="list"></ul>
-    <script src="../lib/quesillo.js"></script>
-    <script>
-        const list = $('#list');
-        
-        for(let i = 1; i<=150; i++){
-            const liConfig = {
-                element:'li',
-                text:'element number '+i
-            }
-            const item = createElement(liConfig);
-            list.append(item.element);
+    <ul id="list" class="qs"></ul>
+    <script type="module">
+        import { getFromId, createElement } from "../lib/quesillo.js";
+        const { list } = getFromId('elementHTML');
+
+        for(let i = 1; i<=20; i++){
+            const item = createElement('li');
+            item.innerText = `Element number ${i} ⭐`;
+            list.append(item);
         }
     </script>
 </body>

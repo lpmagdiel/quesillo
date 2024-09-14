@@ -1,49 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagination</title>
     <style>
-        *{
+        * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
         }
-        .container{
+
+        .container {
             width: 100%;
-            height:300px;
+            height: 300px;
             border: 2px solid black;
             margin-bottom: 5px;
         }
-        .page{
+
+        .page {
             width: 100%;
             height: 100%;
         }
+        .row{
+            display: grid;
+            grid-template-columns: 1fr 80px;
+            height: 40px;
+            gap: 5px;
+            margin: 20px;
+            box-sizing: border-box;
+        }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <div id="page1" class="page"><h1>page 1</h1></div>
-        <div id="page2" class="page"><h1>page 2</h1></div>
-        <div id="page3" class="page"><h1>page 3</h1></div>
-        <div id="page4" class="page"><h1>page 4</h1></div>
-        <div id="page5" class="page"><h1>page 5</h1></div>
-        <div id="page6" class="page"><h1>page 6</h1></div>
+    <div class="row">
+        <input id="search" type="text" placeholder="Name page">
+        <button id="btn-go">GO!</button>
     </div>
-    <input id="search" type="text" placeholder="Name page">
-    <button id="btn-go">GO!</button>
-    <script src="../lib/quesillo.js"></script>
-    <script>
-        const pages = Array.from($('.page')).map(page => {
-            return {name: page.id, element: page}
+    <div class="container">
+        <div id="page1" class="page">
+            <h1>page 1</h1>
+        </div>
+        <div id="page2" class="page">
+            <h1>page 2</h1>
+        </div>
+        <div id="page3" class="page">
+            <h1>page 3</h1>
+        </div>
+        <div id="page4" class="page">
+            <h1>page 4</h1>
+        </div>
+        <div id="page5" class="page">
+            <h1>page 5</h1>
+        </div>
+        <div id="page6" class="page">
+            <h1>page 6</h1>
+        </div>
+    </div>
+    <script type="module">
+        import { Pagination, getByClass, getById,onClick } from "../lib/quesillo.js";
+        const btnGo = getById('btn-go');
+        const search = getById('search');
+
+        const pages = getByClass('page').map(page => {
+            return { name: page.id, element: page }
         });
         const paginator = new Pagination(pages);
         paginator.activePage("page3");
-        $onClick("#btn-go",e=>{
-            const pageName = $("#search").value;
+
+        onClick(btnGo, e => {
+            const pageName = search.value;
             paginator.activePage(pageName);
+            
+            console.info(paginator.active);
         });
     </script>
 </body>
+
 </html>
