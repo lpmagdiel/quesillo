@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quesillo.js - 3D Card Gallery</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #1a1a1a, #4a4a4a);
+            perspective: 1000px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .card {
+            width: 200px;
+            height: 300px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+            cursor: pointer;
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, #FF5733, #FF3333);
+            transform: rotateY(0deg);
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, #33FF57, #33FF33);
+            transform: rotateY(180deg);
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="card1" class="card qs">
+            <div class="card-face card-front">Hover Me</div>
+            <div class="card-face card-back">🌟</div>
+        </div>
+        <div id="card2" class="card qs">
+            <div class="card-face card-front">Click Me</div>
+            <div class="card-face card-back">🎮</div>
+        </div>
+        <div id="card3" class="card qs">
+            <div class="card-face card-front">Transform Me</div>
+            <div class="card-face card-back">🎨</div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="flip-all-btn" class="qs">Flip All Cards</button>
+        <button id="reset-btn" class="qs">Reset Cards</button>
+    </div>
+
+    <script type="module">
+        import { $q } from '../../lib/quesillo.js';
+
+        const { card1, card2, card3, flipAllBtn, resetBtn } = $q('.qs').vars;
+        const cards = [card1, card2, card3];
+
+        // 3D hover effect
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.1)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+
+            // Click to flip
+            card.addEventListener('click', () => {
+                card.classList.toggle('flipped');
+            });
+        });
+
+        // Control buttons
+        flipAllBtn.addEventListener('click', () => {
+            cards.forEach(card => card.classList.add('flipped'));
+        });
+
+        resetBtn.addEventListener('click', () => {
+            cards.forEach(card => {
+                card.classList.remove('flipped');
+                card.style.transform = '';
+            });
+        });
+
+        // Add random floating animation
+        function addFloatingAnimation() {
+            cards.forEach((card, index) => {
+                const delay = index * 0.2;
+                card.style.animation = `float 3s ease-in-out ${delay}s infinite`;
+            });
+        }
+
+        // Add floating keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-20px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Start floating animation
+        addFloatingAnimation();
+    </script>
+</body>
+</html>

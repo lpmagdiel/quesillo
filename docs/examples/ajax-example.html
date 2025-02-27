@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quesillo.js - AJAX Example</title>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .error {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AJAX with Quesillo.js</h1>
+
+        <!-- GET Example -->
+        <section>
+            <h2>GET Request Example</h2>
+            <button id="fetch-data">Fetch Data</button>
+            <div id="get-result" class="result">Results will appear here...</div>
+        </section>
+
+        <!-- POST Example -->
+        <section>
+            <h2>POST Request Example</h2>
+            <form id="post-form">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="body">Body:</label>
+                    <input type="text" id="body" name="body" required>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+            <div id="post-result" class="result">Form submission results will appear here...</div>
+        </section>
+
+        <div id="error-message" class="error"></div>
+    </div>
+
+    <script type="module">
+        import { $q } from '../../lib/quesillo.js';
+
+        // GET Request Example
+        $q('#fetch-data').on('click', async () => {
+            try {
+                const data = await $q().get('https://jsonplaceholder.typicode.com/posts/1');
+                $q('#get-result').html(`
+                    <h3>${data.title}</h3>
+                    <p>${data.body}</p>
+                `);
+            } catch (error) {
+                showError('Error fetching data: ' + error.message);
+            }
+        });
+
+        // POST Request Example
+        $q('#post-form').on('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                title: $q('#title').val(),
+                body: $q('#body').val(),
+                userId: 1
+            };
+
+            try {
+                const response = await $q().post('https://jsonplaceholder.typicode.com/posts', formData);
+                $q('#post-result').html(`
+                    <h3>Post Created Successfully!</h3>
+                    <p>Title: ${response.title}</p>
+                    <p>Body: ${response.body}</p>
+                    <p>ID: ${response.id}</p>
+                `);
+            } catch (error) {
+                showError('Error submitting form: ' + error.message);
+            }
+        });
+
+        function showError(message) {
+            const errorEl = $q('#error-message');
+            errorEl.text(message);
+            errorEl.css('display', 'block');
+            setTimeout(() => errorEl.css('display', 'none'), 5000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quesillo.js - Interactive Particle System</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            transition: transform 0.3s ease;
+        }
+
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+        }
+
+        .controls button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .controls button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <button id="toggle-btn" class="qs">Toggle Animation</button>
+        <button id="color-btn" class="qs">Change Colors</button>
+    </div>
+
+    <script type="module">
+        import { $q } from '../../lib/quesillo.js';
+
+        const { toggleBtn, colorBtn } = $q('.qs').vars;
+        const particles = [];
+        const colors = ['#FF5733', '#33FF57', '#5733FF', '#FFFF33'];
+        let isAnimating = true;
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let colorIndex = 0;
+
+        // Create particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            document.body.appendChild(particle);
+
+            const angle = Math.random() * Math.PI * 2;
+            const velocity = 1 + Math.random() * 2;
+            const size = 4 + Math.random() * 6;
+
+            particles.push({
+                element: particle,
+                x: window.innerWidth / 2,
+                y: window.innerHeight / 2,
+                vx: Math.cos(angle) * velocity,
+                vy: Math.sin(angle) * velocity,
+                size: size,
+                target: { x: mouseX, y: mouseY }
+            });
+        }
+
+        // Initialize particles
+        for (let i = 0; i < 50; i++) {
+            createParticle();
+        }
+
+        // Animation loop
+        function animate() {
+            if (!isAnimating) return;
+
+            particles.forEach(particle => {
+                // Calculate direction to mouse
+                const dx = particle.target.x - particle.x;
+                const dy = particle.target.y - particle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                // Update velocity with mouse attraction
+                particle.vx += (dx / distance) * 0.2;
+                particle.vy += (dy / distance) * 0.2;
+
+                // Apply velocity limits
+                const speed = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);
+                if (speed > 5) {
+                    particle.vx = (particle.vx / speed) * 5;
+                    particle.vy = (particle.vy / speed) * 5;
+                }
+
+                // Update position
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+
+                // Apply position to DOM
+                particle.element.style.transform = 
+                    `translate(${particle.x}px, ${particle.y}px) scale(${1 + (distance / 1000)})`;
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        // Start animation
+        animate();
+
+        // Event listeners
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            particles.forEach(particle => {
+                particle.target.x = mouseX;
+                particle.target.y = mouseY;
+            });
+        });
+
+        toggleBtn.addEventListener('click', () => {
+            isAnimating = !isAnimating;
+            if (isAnimating) animate();
+            toggleBtn.textContent = isAnimating ? 'Toggle Animation' : 'Resume Animation';
+        });
+
+        colorBtn.addEventListener('click', () => {
+            colorIndex = (colorIndex + 1) % colors.length;
+            const baseColor = colors[colorIndex];
+            
+            particles.forEach(particle => {
+                particle.element.style.background = baseColor;
+                particle.element.style.boxShadow = `0 0 10px ${baseColor}`;
+            });
+        });
+
+        // Window resize handling
+        window.addEventListener('resize', () => {
+            particles.forEach(particle => {
+                particle.x = window.innerWidth / 2;
+                particle.y = window.innerHeight / 2;
+            });
+        });
+    </script>
+</body>
+</html>

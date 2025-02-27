@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quesillo.js - Examples Gallery</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(45deg, #1a1a1a, #4a4a4a);
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .example-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            transition: transform 0.3s ease, background 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .example-card h2 {
+            margin: 0 0 15px 0;
+            color: #fff;
+            font-size: 1.5em;
+        }
+
+        .example-card p {
+            margin: 0 0 20px 0;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+
+        .example-card a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .example-card a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quesillo.js Examples Gallery</h1>
+
+        <div class="examples-grid">
+            <div class="example-card">
+                <h2>3D Cards</h2>
+                <p>Interactive 3D card gallery with hover effects and flip animations.</p>
+                <a href="3d-cards.html">View Example</a>
+            </div>
+
+            <div class="example-card">
+                <h2>AJAX Operations</h2>
+                <p>Demonstration of AJAX requests and data handling with Quesillo.js.</p>
+                <a href="ajax-example.html">View Example</a>
+            </div>
+
+            <div class="example-card">
+                <h2>Color Palette</h2>
+                <p>Dynamic color palette generator with interactive features.</p>
+                <a href="color-palette.html">View Example</a>
+            </div>
+
+            <div class="example-card">
+                <h2>DOM Manipulation</h2>
+                <p>Examples of DOM manipulation using Quesillo.js selectors and methods.</p>
+                <a href="dom-manipulation.html">View Example</a>
+            </div>
+
+            <div class="example-card">
+                <h2>Pagination</h2>
+                <p>Implementation of a clean and responsive pagination system.</p>
+                <a href="pagination-example.html">View Example</a>
+            </div>
+
+            <div class="example-card">
+                <h2>Particle System</h2>
+                <p>Interactive particle system with animation and user controls.</p>
+                <a href="particle-system.html">View Example</a>
+            </div>
+
+            <div class="example-card">
+                <h2>State Management</h2>
+                <p>Example of state management using Quesillo.js store functionality.</p>
+                <a href="store-example.html">View Example</a>
+            </div>
+
+            <div class="example-card">
+                <h2>Variables Import</h2>
+                <p>Demonstration of the variables import feature in Quesillo.js.</p>
+                <a href="vars-example.html">View Example</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

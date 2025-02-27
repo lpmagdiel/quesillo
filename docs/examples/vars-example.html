@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quesillo.js - Variables Import Example</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .box {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .highlight {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Variables Import with Quesillo.js</h1>
+
+        <div id="first-box" class="box qs">First Box</div>
+        <div id="second-box" class="box qs">Second Box</div>
+        <div id="third-box" class="box qs">Third Box</div>
+
+        <div class="controls">
+            <button id="toggle-btn" class="qs">Toggle Highlight</button>
+            <button id="reset-btn" class="qs">Reset</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { $q } from '../../lib/quesillo.js';
+
+        // Import multiple elements using destructuring
+        const { firstBox, secondBox, thirdBox, toggleBtn, resetBtn } = $q('.qs').vars;
+
+        // Log the imported elements
+        console.log('Imported elements:', { firstBox, secondBox, thirdBox, toggleBtn, resetBtn });
+
+        // Add click handlers using the imported variables directly
+        toggleBtn.addEventListener('click', () => {
+            firstBox.classList.toggle('highlight');
+            secondBox.classList.toggle('highlight');
+            thirdBox.classList.toggle('highlight');
+        });
+
+        resetBtn.addEventListener('click', () => {
+            [firstBox, secondBox, thirdBox].forEach(box => {
+                box.classList.remove('highlight');
+            });
+        });
+
+        // Example of individual element manipulation
+        firstBox.addEventListener('click', () => {
+            firstBox.textContent = 'Clicked!';
+        });
+
+        secondBox.addEventListener('click', () => {
+            secondBox.innerHTML = '<strong>HTML Content!</strong>';
+        });
+
+        thirdBox.addEventListener('click', () => {
+            thirdBox.style.backgroundColor = '#FF5733';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quesillo.js - DOM Manipulation Example</title>
+    <style>
+        .highlight { background-color: yellow; }
+        .box { 
+            width: 200px; 
+            height: 200px; 
+            border: 1px solid #333;
+            margin: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .active { 
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>DOM Manipulation with Quesillo.js</h1>
+
+    <div id="text-example" class="box qs">Click to change text</div>
+    <div id="html-example" class="box">Click to add <b>HTML</b></div>
+    <div id="class-example" class="box">Click to toggle class</div>
+    
+    <input type="text" id="input-example" placeholder="Type something...">
+    <div id="input-display" class="box">Input value will appear here</div>
+
+    <script type="module">
+        import { $q } from '../../lib/quesillo.js';
+
+        // Text manipulation
+        $q('#text-example').on('click', function() {
+            $q(this).text('Text Changed!');
+        });
+
+        // HTML manipulation
+        $q('#html-example').on('click', function() {
+            $q(this).html('<b>HTML</b> content <i>changed!</i>');
+        });
+
+        // Class manipulation
+        $q('#class-example').on('click', function() {
+            $q(this).toggleClass('active');
+        });
+
+        // Input value handling
+        $q('#input-example').on('input', function() {
+            $q('#input-display').text($q(this).val());
+        });
+    </script>
+</body>
+</html>

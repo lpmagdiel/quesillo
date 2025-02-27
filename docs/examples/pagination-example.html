@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quesillo.js - Pagination Example</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .page {
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .nav-buttons {
+            margin: 20px 0;
+        }
+        button {
+            padding: 8px 16px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .active-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pagination with Quesillo.js</h1>
+
+        <div class="nav-buttons" id="nav-buttons"></div>
+
+        <div id="page1" class="page">
+            <h2>Page 1</h2>
+            <p>This is the content of page 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+
+        <div id="page2" class="page">
+            <h2>Page 2</h2>
+            <p>Welcome to page 2! Here's some different content to demonstrate page switching.</p>
+        </div>
+
+        <div id="page3" class="page">
+            <h2>Page 3</h2>
+            <p>And finally, page 3. This shows how easy it is to manage multiple pages with Quesillo.js</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { $q, Pagination } from '../../lib/quesillo.js';
+
+        // Initialize pagination
+        const pages = [
+            { name: 'page1', element: document.getElementById('page1') },
+            { name: 'page2', element: document.getElementById('page2') },
+            { name: 'page3', element: document.getElementById('page3') }
+        ];
+
+        const pagination = new Pagination(pages);
+
+        // Create navigation buttons
+        const navButtons = document.getElementById('nav-buttons');
+        pages.forEach(page => {
+            const button = document.createElement('button');
+            button.textContent = `Go to ${page.name}`;
+            button.addEventListener('click', () => {
+                pagination.show(page.name);
+                updateButtons(page.name);
+            });
+            navButtons.appendChild(button);
+        });
+
+        // Update button styles
+        function updateButtons(activePage) {
+            const buttons = navButtons.getElementsByTagName('button');
+            Array.from(buttons).forEach((button, index) => {
+                if (pages[index].name === activePage) {
+                    button.classList.add('active-button');
+                } else {
+                    button.classList.remove('active-button');
+                }
+            });
+        }
+
+        // Show first page and update buttons
+        pagination.show('page1');
+        updateButtons('page1');
+    </script>
+</body>
+</html>

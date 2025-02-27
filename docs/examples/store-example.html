@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quesillo.js - Store Example</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .counter-display {
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+        .subscribers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .subscriber {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>State Management with Quesillo.js Store</h1>
+
+        <div class="counter-display" id="counter">0</div>
+
+        <div class="controls">
+            <button id="decrement">-</button>
+            <button id="increment">+</button>
+            <button id="reset">Reset</button>
+        </div>
+
+        <h2>Subscribers</h2>
+        <div class="subscribers">
+            <div class="subscriber" id="squared">
+                <h3>Squared Value</h3>
+                <p>0</p>
+            </div>
+            <div class="subscriber" id="doubled">
+                <h3>Doubled Value</h3>
+                <p>0</p>
+            </div>
+            <div class="subscriber" id="negative">
+                <h3>Negative Value</h3>
+                <p>0</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { $q, Store } from '../../lib/quesillo.js';
+
+        // Create a store with initial value
+        const counterStore = new Store(0);
+
+        //update all
+        counterStore.subscribe(value => {
+            $q('#counter').text(value);
+            $q('#squared p').text(value * value);
+            $q('#doubled p').text(value * 2);
+            $q('#negative p').text(-value);
+        });
+
+        // Event handlers
+        $q('#increment').on('click', () => {
+            counterStore.update(value => value + 1);
+        });
+
+        $q('#decrement').on('click', () => {
+            counterStore.update(value => value - 1);
+        });
+
+        $q('#reset').on('click', () => {
+            counterStore.set(0);
+        });
+    </script>
+</body>
+</html>
